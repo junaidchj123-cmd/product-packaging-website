@@ -1,0 +1,47 @@
+PRODUCT PACKAGING WEBSITE — DEPLOYMENT
+
+This ZIP is the website package. The earlier Trained_Model.zip contains training artifacts and is not the website.
+
+1. Extract this ZIP.
+2. Recommended: create a NEW GitHub repository named product-packaging-website (private is fine).
+3. Upload all extracted FILES AND FOLDERS into the repository ROOT. Upload the contents, not the ZIP itself and not an extra wrapping folder.
+4. At the repository top level you must see:
+   app.py
+   build.py
+   requirements.txt
+   pyproject.toml
+   vercel.json
+   model/
+   public/
+5. Open model/ and confirm packaging.onnx (about 9.6 MB) is present.
+6. Commit the upload with message: Add packaging classifier website
+7. In Vercel: Add New Project > import this GitHub repository.
+8. Framework Preset: Flask (the included vercel.json also selects Flask).
+9. Root Directory: leave at repository root. If you uploaded files into a subfolder, select the folder that directly contains app.py and vercel.json.
+10. Build/Install settings: leave at framework defaults. Clear any old output-directory or custom-build overrides from an earlier static deployment. The included pyproject.toml runs build.py as a check. Do not set Output Directory to public; this project uses a Python backend.
+11. Deploy. After status becomes Ready, click Visit to open the public site.
+12. Try one of the sample photos and click Identify material.
+
+For an EXISTING repository, replace the old requirements.txt and vercel.json with these versions; upload app.py, build.py, pyproject.toml, model/ and public/ in the same root. Do not merge the old TensorFlow training requirements into the runtime requirements. A new website-only repository is simpler and avoids bundling training files.
+
+If it still shows 404:
+- Confirm Vercel imported the correct repository and branch.
+- Confirm the Root Directory contains app.py, requirements.txt and vercel.json.
+- Clear an old static Output Directory override; use Flask.
+- Redeploy the latest commit. Use Visit rather than a dashboard URL.
+
+If the page opens but the model is unavailable:
+- Open https://YOUR-PUBLIC-DOMAIN/api/health (replace with your real domain).
+- Check Vercel Runtime Logs.
+- Confirm model/packaging.onnx and model/manifest.json were uploaded.
+- build.py intentionally fails when the model is missing or incomplete.
+
+Optional local run:
+python -m venv .venv
+Activate the environment, then:
+pip install -r requirements.txt
+python build.py
+python app.py
+Open http://127.0.0.1:5000
+
+The app has been tested locally. Your Vercel project/account settings still need to be configured as above; this ZIP does not itself publish a deployment.
