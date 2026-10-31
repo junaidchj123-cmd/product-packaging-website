@@ -1,0 +1,21 @@
+{
+  "sha256": "372508cb0ddade617ab2e548573f07a7fd9b5719641746ae4427687a25864a4b",
+  "source": "Trained packaging_model.keras",
+  "input_shape": [
+    1,
+    160,
+    160,
+    3
+  ],
+  "input_dtype": "float32",
+  "input_pixels": "RGB 0..255; rescaling is embedded",
+  "resize": "Pillow bilinear after EXIF transpose",
+  "classes": [
+    "cardboard",
+    "glass",
+    "metal",
+    "plastic"
+  ],
+  "test_accuracy": 0.8516483516483516,
+  "test_images": 182
+}
